@@ -7,8 +7,6 @@ import cors from 'cors';
 
 import indexRoutes from './routes/indexRoutes';
 import postsRoutes from './routes/usersRoutes';
-import librosRoutes from './routes/LibrosRoutes';
-
 
 class Server {
     public app: express.Application;
@@ -27,7 +25,7 @@ class Server {
         .then(db => console.log("DB is connected"));
 
         //Settings
-        this.app.set('port', process.env.PORT || 3000); 
+        this.app.set('port', process.env.PORT || 3000);
 
         //Middlewares
         this.app.use(morgan('dev')); //Allows to see by console the petitions that eventually arrive.
@@ -41,7 +39,7 @@ class Server {
     routes() {
         this.app.use(indexRoutes);
         this.app.use('/api/users', postsRoutes);
-        this.app.use('/api/libros', librosRoutes);
+
     }
 
     start() {
@@ -51,5 +49,5 @@ class Server {
     }
 }
 
-const server = new Server(); 
+const server = new Server();
 server.start();

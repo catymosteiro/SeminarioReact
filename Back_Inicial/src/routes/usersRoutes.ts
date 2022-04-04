@@ -31,10 +31,11 @@ class UserRoutes {
 
     public async addUser(req: Request, res: Response) : Promise<void> {
         console.log(req.body);
-        const {id, name, age, password} = req.body;
-        const newUser = new User({id, name, age, password});
-        await newUser.save();
-        res.status(200).send('User added!');
+        const { name, age, password} = req.body;
+        const newUser = new User({name, age, password});
+        console.log(newUser);
+        const user = await newUser.save();
+        res.status(200).send(user);
     }
 
     public async updateUser(req: Request, res: Response) : Promise<void> {
@@ -55,7 +56,7 @@ class UserRoutes {
         else{
             res.status(200).send('Deleted!');
         }
-    } 
+    }
     routes() {
         this.router.get('/', this.getUsers);
         this.router.get('/:nameUser', this.getUserByName);
